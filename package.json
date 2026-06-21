@@ -1,0 +1,22 @@
+{
+  "name": "ninelivesco",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Nine Lives Co. — Console Necromancy. The public site (coming-soon), styled by @ninelives/necromancy on @kitten/core (both vendored as submodules).",
+  "workspaces": [
+    "packages/*",
+    "sites/ninelives"
+  ],
+  "scripts": {
+    "build": "npm run build --workspace=@ninelives/site",
+    "start": "npm run start --workspace=@ninelives/site",
+    "serve": "npm run serve --workspace=@ninelives/site",
+    "clean": "npm run clean --workspace=@ninelives/site"
+  },
+  "devDependencies": {
+    "handlebars": "^4.7.8",
+    "http-server": "^14.1.1",
+    "sass": "^1.77.8",
+    "tailwindcss": "^3.4.17"
+  }
+}

@@ -1,0 +1,8 @@
+/* Nine Lives Co. — src/input.css (Tailwind entry). The SASS-compiled framework
+   (.tmp/necromancy.css) is imported first; Tailwind then resolves @apply/theme()
+   and tree-shakes to what the rendered page uses. */
+@import "../.tmp/necromancy.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

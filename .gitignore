@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+
+# Build output / intermediate
+**/dist/
+**/.tmp/
+**/.tmp.css
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/launch.json

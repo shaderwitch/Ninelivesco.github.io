@@ -1,0 +1,22 @@
+{
+  "title": "Nine Lives Co. — Console Necromancy",
+  "description": "Console Necromancy. Retro consoles, raised from the dead — hand-worked at the bench. Summoning soon.",
+  "brand": "Nine Lives Co.",
+  "services": ["Diagnosis", "Repairs", "Restoration", "High Quality Refurbishment", "Recapping", "Mods", "Case Mods", "Accessories"],
+  "hero": {
+    "subtitle": "Console Necromancy — the ninth life, by hand.",
+    "lede": "Diagnosis, restoration, mods, and the rites of resurrection — every console hand-worked at the bench, never rushed.",
+    "rite": {
+      "kicker": "Summoning soon",
+      "title": "Get the summons",
+      "lede": "Drop your email and we'll send word the moment the doors open.",
+      "note": "Nine lives, zero spam — just one message when we go live."
+    }
+  },
+  "footer": {
+    "domain": "ninelives.repair",
+    "numeral": "IX",
+    "est": "EST. MMXXVI",
+    "legal": "© Nine Lives Co. — all rites reserved."
+  }
+}

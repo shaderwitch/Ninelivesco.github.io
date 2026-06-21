@@ -1,0 +1,8 @@
+// =============================================================================
+// Nine Lives Co. — SASS entry. Composes the Necromancy framework (theme + base
+// + components) with this site's coming-soon styles; dart-sass emits one sheet
+// that Tailwind picks up via src/input.css. Edit framework styles in
+// packages/necromancy — this site only adds its own page layout.
+// =============================================================================
+@use "../../../packages/necromancy/scss/necromancy";
+@use "scss/coming-soon";

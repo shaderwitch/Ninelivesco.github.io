@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+{{> head}}
+<body>
+  {{> sigil-defs}}
+  {{> site-frame}}
+
+  <main class="cs">
+    <canvas class="ember-canvas" data-embers data-density="1.4" aria-hidden="true"></canvas>
+
+    <nav class="cs__topbar" aria-label="What we do">
+      {{#each site.services}}<span class="cs__topbar-item">{{this}}</span>{{#unless @last}}<span class="cs__topbar-dot" aria-hidden="true">·</span>{{/unless}}{{/each}}
+    </nav>
+
+    <div class="cs__inner">
+      <div class="cs__content">
+        <span class="cs__seal"><svg class="sigil-svg cs__seal-svg"><use href="#sigil-node" /></svg></span>
+        <h1 class="cs__title font-ritual text-bone-100">{{site.brand}}</h1>
+        <p class="cs__subtitle font-reverie italic text-gold-400">{{site.hero.subtitle}}</p>
+        <span class="cs__rule" aria-hidden="true"></span>
+        <p class="cs__lede">{{site.hero.lede}}</p>
+      </div>
+
+      <span class="cs__divide" aria-hidden="true"></span>
+
+      <aside class="cs__rite">
+        <p class="cs__rite-kicker">{{site.hero.rite.kicker}}</p>
+        <h2 class="cs__rite-title font-ritual text-bone-100">{{site.hero.rite.title}}</h2>
+        <p class="cs__rite-lede">{{site.hero.rite.lede}}</p>
+        <form class="cs__notify" onsubmit="return false">
+          <input class="input" type="email" placeholder="your@email.com" aria-label="Email address" autocomplete="email" />
+          <button class="btn btn-solid" type="submit"><i class="ph ph-bell"></i> Notify me</button>
+        </form>
+        <p class="cs__note text-smoke"><i class="ph-fill ph-paw-print cs__paw"></i> {{site.hero.rite.note}}</p>
+      </aside>
+    </div>
+
+    <footer class="cs__footer footer-mark">
+      <span class="footer-mark__domain">{{site.footer.domain}}</span>
+      <span class="footer-mark__numeral">{{site.footer.numeral}}</span>
+      <span class="footer-mark__est">{{site.footer.est}}</span>
+    </footer>
+  </main>
+
+  <script src="js/embers.js"></script>
+  <script type="module" src="js/index.js"></script>
+</body>
+</html>
