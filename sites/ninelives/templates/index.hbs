@@ -8,11 +8,6 @@
   <main class="cs">
     <canvas class="ember-canvas" data-embers data-density="1.4" aria-hidden="true"></canvas>
 
-    {{!-- Staff sign-in → the Bench (qr-inventory at bench.ninelives.repair). --}}
-    <a class="cs__signin" href="https://bench.ninelives.repair/login" aria-label="Sign in to the Bench">
-      <i class="ph ph-sign-in" aria-hidden="true"></i><span>Sign in</span>
-    </a>
-
     <nav class="cs__topbar" aria-label="What we do">
       {{#each site.services}}<span class="cs__topbar-item">{{this}}</span>{{#unless @last}}<span class="cs__topbar-dot" aria-hidden="true">·</span>{{/unless}}{{/each}}
     </nav>
