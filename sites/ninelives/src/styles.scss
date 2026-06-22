@@ -4,5 +4,5 @@
 // that Tailwind picks up via src/input.css. Edit framework styles in
 // packages/necromancy — this site only adds its own page layout.
 // =============================================================================
-@use "../../../packages/necromancy/scss/necromancy";
+@use "@ninelives/necromancy/scss/necromancy";
 @use "scss/coming-soon";

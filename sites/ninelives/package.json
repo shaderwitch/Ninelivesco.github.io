@@ -5,11 +5,11 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@ninelives/necromancy": "1.0.0"
+    "@ninelives/necromancy": "github:shaderwitch/Necromancy#main"
   },
   "scripts": {
     "clean": "node -e \"import('node:fs').then(fs=>fs.rmSync('dist',{recursive:true,force:true}))\"",
-    "build:sass": "sass --no-source-map --quiet-deps src/styles.scss .tmp/necromancy.css",
+    "build:sass": "sass --no-source-map --quiet-deps --load-path=../../node_modules --load-path=node_modules src/styles.scss .tmp/necromancy.css",
     "build:css": "npm run build:sass && tailwindcss -i src/input.css -o dist/css/main.css --minify",
     "build:html": "node build.mjs",
     "build": "npm run build:html && npm run build:css",

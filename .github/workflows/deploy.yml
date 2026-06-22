@@ -17,11 +17,8 @@ jobs:
       # Submodules (necromancy, kitten-core) are separate PRIVATE repos, so the
       # default GITHUB_TOKEN can't read them — a PAT with read access to both is
       # required for the recursive checkout to succeed.
-      - name: Checkout (with submodules)
+      - name: Checkout
         uses: actions/checkout@v4
-        with:
-          submodules: recursive
-          token: ${{ secrets.SUBMODULES_TOKEN }}
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -30,7 +27,10 @@ jobs:
           cache: npm
 
       - name: Install
-        run: npm ci
+        # @kitten/core + @ninelives/necromancy are private git deps — npm needs a token.
+        run: |
+          git config --global url."https://x-access-token:${{ secrets.SUBMODULES_TOKEN }}@github.com/".insteadOf "https://github.com/"
+          npm ci
 
       - name: Build
         run: npm run build

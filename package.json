@@ -4,7 +4,6 @@
   "private": true,
   "description": "Nine Lives Co. — Console Necromancy. The public site (coming-soon), styled by @ninelives/necromancy on @kitten/core (both vendored as submodules).",
   "workspaces": [
-    "packages/*",
     "sites/ninelives"
   ],
   "scripts": {

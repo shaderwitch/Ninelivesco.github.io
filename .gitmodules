@@ -1,6 +1,0 @@
-[submodule "packages/necromancy"]
-	path = packages/necromancy
-	url = https://github.com/shaderwitch/Necromancy.git
-[submodule "packages/kitten-core"]
-	path = packages/kitten-core
-	url = https://github.com/shaderwitch/kitten-core.git

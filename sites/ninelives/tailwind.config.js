@@ -6,7 +6,7 @@ module.exports = {
   content: [
     "./dist/**/*.html",
     "./templates/**/*.hbs",
-    "../../packages/necromancy/hbs/**/*.hbs",
+    "../../node_modules/@ninelives/necromancy/hbs/**/*.hbs",
   ],
   theme: { extend: {} },
   plugins: [],

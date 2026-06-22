@@ -8,10 +8,13 @@
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { writeFileSync, mkdirSync } from "node:fs";
+import { createRequire } from "node:module";
 import { Handlebars, registerFramework, loadData, shipFrameworkJS, read, log } from "@ninelives/necromancy/build";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const FRAMEWORK = join(__dirname, "..", "..", "packages", "necromancy");
+const require = createRequire(import.meta.url);
+// The framework installs as a package now — resolve its root from node_modules.
+const FRAMEWORK = dirname(require.resolve("@ninelives/necromancy"));
 
 registerFramework(FRAMEWORK);                         // framework partials (head, sigil-defs, site-frame, …)
 const data = loadData(join(__dirname, "data"));
