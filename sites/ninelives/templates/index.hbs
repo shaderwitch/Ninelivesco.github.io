@@ -42,11 +42,11 @@
         <p class="cs__rite-kicker">{{site.hero.rite.kicker}}</p>
         <h2 class="cs__rite-title font-ritual text-bone-100">{{site.hero.rite.title}}</h2>
         <p class="cs__rite-lede">{{site.hero.rite.lede}}</p>
-        <form class="cs__notify" onsubmit="return false">
-          <input class="input" type="email" placeholder="your@email.com" aria-label="Email address" autocomplete="email" />
+        <form class="cs__notify" id="cs-notify" novalidate>
+          <input class="input" id="cs-email" name="email" type="email" required placeholder="your@email.com" aria-label="Email address" autocomplete="email" />
           <button class="btn btn-solid" type="submit"><i class="ph ph-bell"></i> Notify me</button>
         </form>
-        <p class="cs__note text-smoke"><i class="ph-fill ph-paw-print cs__paw"></i> {{site.hero.rite.note}}</p>
+        <p class="cs__note text-smoke" id="cs-status" role="status" aria-live="polite"><i class="ph-fill ph-paw-print cs__paw"></i> {{site.hero.rite.note}}</p>
       </aside>
     </div>
 
@@ -57,6 +57,43 @@
     </footer>
   </main>
 
+  {{!-- Coming-soon signup: POSTs to the Bench host (which holds Resend + the
+        themed thank-you email). Inline for the same fresh-on-every-deploy reason
+        as the sign-in pill above. --}}
+  <script>
+  (function () {
+    var ENDPOINT = 'https://bench.ninelives.repair/api/notify';
+    var form = document.getElementById('cs-notify');
+    if (!form) return;
+    var email = document.getElementById('cs-email');
+    var status = document.getElementById('cs-status');
+    var btn = form.querySelector('button[type=submit]');
+    var EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+    function show(msg, kind) {
+      status.textContent = msg;
+      status.style.color = kind === 'err' ? 'rgb(var(--danger, 200 80 70))'
+        : kind === 'ok' ? 'rgb(var(--gold-300, 243 221 164))'
+        : 'rgb(var(--smoke, 126 118 137))';
+    }
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var val = (email.value || '').trim();
+      if (!EMAIL_RE.test(val)) { show('Please enter a valid email address.', 'err'); email.focus(); return; }
+      btn.disabled = true; show('Summoning…', '');
+      fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'email=' + encodeURIComponent(val),
+      })
+        .then(function (r) { return r.json().catch(function () { return { ok: r.ok }; }); })
+        .then(function (d) {
+          if (d && d.ok) { form.style.display = 'none'; show("You're on the list — check your inbox.", 'ok'); }
+          else { btn.disabled = false; show((d && d.error) || 'Something went wrong — please try again.', 'err'); }
+        })
+        .catch(function () { btn.disabled = false; show('Network error — please try again.', 'err'); });
+    });
+  })();
+  </script>
   <script src="js/embers.js"></script>
   <script type="module" src="js/index.js"></script>
 </body>
