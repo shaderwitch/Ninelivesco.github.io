@@ -27,9 +27,14 @@ jobs:
           cache: npm
 
       - name: Install
-        # @kitten/core + @ninelives/necromancy are private git deps — npm needs a token.
+        # @kitten/core + @ninelives/necromancy are private git deps — npm needs a
+        # token. Rewrite every github URL form (https, ssh://, git@) the lockfile
+        # might use to the tokened HTTPS so the clone authenticates.
         run: |
-          git config --global url."https://x-access-token:${{ secrets.SUBMODULES_TOKEN }}@github.com/".insteadOf "https://github.com/"
+          TOKEN=${{ secrets.SUBMODULES_TOKEN }}
+          git config --global url."https://x-access-token:$TOKEN@github.com/".insteadOf "https://github.com/"
+          git config --global url."https://x-access-token:$TOKEN@github.com/".insteadOf "ssh://git@github.com/"
+          git config --global url."https://x-access-token:$TOKEN@github.com/".insteadOf "git@github.com:"
           npm ci
 
       - name: Build
