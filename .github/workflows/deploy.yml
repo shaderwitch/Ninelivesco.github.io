@@ -29,14 +29,18 @@ jobs:
           cache: npm
 
       - name: Install
-        # @kitten/core + @ninelives/necromancy are private git deps — npm needs a
-        # token. Rewrite every github URL form (https, ssh://, git@) the lockfile
-        # might use to the tokened HTTPS so the clone authenticates.
+        # @kitten/core + @ninelives/necromancy are private git deps. npm runs git
+        # with global/system config disabled, so a `git config --global insteadOf`
+        # is ignored. The GIT_CONFIG_* env vars ARE always honoured — use them to
+        # rewrite every github URL form (ssh://, git@, https) the resolver may pick
+        # into a token-authed HTTPS clone.
+        env:
+          TOKEN: ${{ secrets.SUBMODULES_TOKEN }}
         run: |
-          TOKEN=${{ secrets.SUBMODULES_TOKEN }}
-          git config --global url."https://x-access-token:$TOKEN@github.com/".insteadOf "https://github.com/"
-          git config --global url."https://x-access-token:$TOKEN@github.com/".insteadOf "ssh://git@github.com/"
-          git config --global url."https://x-access-token:$TOKEN@github.com/".insteadOf "git@github.com:"
+          export GIT_CONFIG_COUNT=3
+          export GIT_CONFIG_KEY_0="url.https://x-access-token:${TOKEN}@github.com/.insteadOf" GIT_CONFIG_VALUE_0="ssh://git@github.com/"
+          export GIT_CONFIG_KEY_1="url.https://x-access-token:${TOKEN}@github.com/.insteadOf" GIT_CONFIG_VALUE_1="git@github.com:"
+          export GIT_CONFIG_KEY_2="url.https://x-access-token:${TOKEN}@github.com/.insteadOf" GIT_CONFIG_VALUE_2="https://github.com/"
           npm ci
 
       - name: Build
