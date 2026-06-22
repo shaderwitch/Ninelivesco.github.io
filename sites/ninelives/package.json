@@ -5,7 +5,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@ninelives/necromancy": "github:shaderwitch/Necromancy#main"
+    "@ninelives/necromancy": "git+https://github.com/shaderwitch/Necromancy.git#main"
   },
   "scripts": {
     "clean": "node -e \"import('node:fs').then(fs=>fs.rmSync('dist',{recursive:true,force:true}))\"",

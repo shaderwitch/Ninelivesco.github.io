@@ -19,6 +19,8 @@ jobs:
       # required for the recursive checkout to succeed.
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false   # don't leave a GITHUB_TOKEN extraheader that shadows the PAT for private git deps
 
       - name: Setup Node
         uses: actions/setup-node@v4
