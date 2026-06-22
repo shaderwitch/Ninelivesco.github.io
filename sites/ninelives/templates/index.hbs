@@ -2,11 +2,29 @@
 <html lang="en">
 {{> head}}
 <body>
+  {{!-- Staff sign-in pill (→ the Bench). Styled INLINE on purpose: the HTML is
+        fresh on every deploy, whereas css/main.css can be CDN-cached, so inline
+        styling can never render stale/unstyled. var() fallbacks keep it safe. --}}
+  <style>
+    .cs__signin{position:absolute;z-index:3;top:clamp(1.3rem,.7rem + 2vw,2.5rem);right:clamp(1.5rem,.7rem + 2.4vw,3rem);
+      display:inline-flex;align-items:center;gap:.45rem;text-decoration:none;line-height:1;white-space:nowrap;
+      font-family:'Cinzel',Georgia,serif;font-size:.82rem;letter-spacing:.08em;
+      color:rgb(var(--gold-400,227 199 122));padding:.5rem .95rem;border-radius:999px;
+      border:1px solid rgb(var(--gold-500,201 160 78)/.35);
+      background:rgb(var(--ink-900,12 10 16)/.5);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+      transition:color .25s,border-color .25s,background .25s}
+    .cs__signin i{font-size:1.05em}
+    .cs__signin:hover,.cs__signin:focus-visible{color:rgb(var(--bone-100,244 238 224));border-color:rgb(var(--gold-500,201 160 78));background:rgb(var(--gold-500,201 160 78)/.1)}
+    @media(max-width:34rem){.cs__signin{top:9px;right:9px;font-size:.72rem;padding:.4rem .72rem}}
+  </style>
+
   {{> sigil-defs}}
   {{> site-frame}}
 
   <main class="cs">
     <canvas class="ember-canvas" data-embers data-density="1.4" aria-hidden="true"></canvas>
+
+    <a class="cs__signin" href="https://bench.ninelives.repair/login" aria-label="Sign in to the Bench"><i class="ph ph-sign-in" aria-hidden="true"></i><span>Sign in</span></a>
 
     <nav class="cs__topbar" aria-label="What we do">
       {{#each site.services}}<span class="cs__topbar-item">{{this}}</span>{{#unless @last}}<span class="cs__topbar-dot" aria-hidden="true">·</span>{{/unless}}{{/each}}
