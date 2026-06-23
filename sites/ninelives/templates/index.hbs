@@ -87,7 +87,12 @@
       })
         .then(function (r) { return r.json().catch(function () { return { ok: r.ok }; }); })
         .then(function (d) {
-          if (d && d.ok) { form.style.display = 'none'; show("You're on the list — check your inbox.", 'ok'); }
+          if (d && d.ok) {
+            form.style.display = 'none';
+            show(d.duplicate
+              ? "You're already on the list — we'll be in touch."
+              : "You're on the list — check your inbox.", 'ok');
+          }
           else { btn.disabled = false; show((d && d.error) || 'Something went wrong — please try again.', 'err'); }
         })
         .catch(function () { btn.disabled = false; show('Network error — please try again.', 'err'); });
